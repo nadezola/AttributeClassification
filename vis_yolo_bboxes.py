@@ -29,17 +29,16 @@ def get_bbox_style(color='navy-blue'):
             family='monospace',
             size=12,
             color=color,
-            #bold=True,
+            bold=True,
             italic=True,
-            #line_spacing=1,
             halign='center',
             valign='top'
     )
     box_style = viren2d.BoundingBox2DStyle(
         line_style=line_style,
         text_style=text_style,
-        box_fill_color='same!10',
-        text_fill_color='white!20',
+        box_fill_color='white!30',
+        text_fill_color='white!40',
         clip_label=True)
 
     return box_style
@@ -54,7 +53,7 @@ if __name__ == '__main__':
     for phase in phases:
         imgs_dir = dataset_root / 'images' / phase
         lbls_dir = dataset_root / 'labels' / phase
-        out_imgs_dir = Path(args.out) / phase / 'images'
+        out_imgs_dir = Path(args.out) / phase
 
         if not out_imgs_dir.exists():
             out_imgs_dir.mkdir(parents=True)
@@ -64,6 +63,7 @@ if __name__ == '__main__':
 
             # Read image
             img = cv2.imread(str(imgs_dir / f'{lbl_f.stem}.jpg'))
+            img = cv2.resize(img, (0, 0), fx=0.5, fy=0.5)
             fname = f'{lbl_f.stem}.jpg'
             if lbl_f.stat().st_size == 0:
                 cv2.imwrite(str(out_imgs_dir / fname), img)
@@ -86,7 +86,7 @@ if __name__ == '__main__':
 
                 color = viren2d.color_from_object_category(class_name)
                 box_style = get_bbox_style(color)
-                rect = viren2d.Rect.from_lrtb(bbox[1], bbox[2], bbox[3], bbox[4], radius=0.2)
+                rect = viren2d.Rect.from_lrtb(x1, x2, y1, y2, radius=0.2)
                 painter.draw_bounding_box_2d(rect, box_style=box_style, label_bottom=[class_name])
                 imgvis = cv2.cvtColor(np.array(painter.canvas), cv2.COLOR_BGR2RGB)
 
