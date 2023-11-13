@@ -28,19 +28,6 @@ def trainval_dataset():
     files_train, labels_train = collect_data(DIR_TRAIN)
     files_val, labels_val = collect_data(DIR_VAL)
 
-    # transforms_train = transforms.Compose([
-    #     transforms.Resize(opt.resize),
-    #     transforms.RandomHorizontalFlip(),
-    #     transforms.ToTensor(),
-    #     transforms.Normalize(opt.mean, opt.std),
-    # ])
-    #
-    # transforms_val = transforms.Compose([
-    #     transforms.Resize(opt.resize),
-    #     transforms.ToTensor(),
-    #     transforms.Normalize(opt.mean, opt.std)
-    # ])
-
     transforms_train = transforms.Compose([
         transforms.Resize(opt.resize),
         #transforms.Pad(32, padding_mode='reflect'),
