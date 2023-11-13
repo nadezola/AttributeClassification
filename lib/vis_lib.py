@@ -7,6 +7,7 @@ import numpy as np
 import config.opt as opt
 import cv2
 import pandas as pd
+from tqdm import tqdm
 
 
 def plot_train_data(dataset, phase):
@@ -74,21 +75,21 @@ def plot_loss(train_loss_array, val_loss_array, epoch):
     plt.savefig(f'exps/exp_{opt.expID}/loss.jpg')
 
 
-def vis_labels(fnames, labels, image_dir, vis_image_dir, color=(0, 0, 255), org=(5, 10)):
+def vis_labels(fnames, labels, image_dir, vis_image_dir, color=(0, 0, 0), org=(5, 10)):
     '''
         :param fnames: list of fnames in right order
         :param labels: list of classes in the same order
     '''
 
-    for idx in range(len(fnames)):
+    for idx in tqdm(range(len(fnames))):
         file = os.path.join(image_dir, fnames[idx])
         image = cv2.imread(file)
-        lbls = labels[idx]
-        step = 0
-        for l in lbls:
-            image = cv2.putText(image, l, org=(5, 10 + step), fontFace=cv2.FONT_HERSHEY_SIMPLEX,
-                                fontScale=0.3, color=color, thickness=1)
-            step += 10
+        l = labels[idx]
+
+        x, y, w, h = 0, 0, 75, 15
+        cv2.rectangle(image, (x, x), (x + w, y + h), (255, 255, 255), -1)
+        image = cv2.putText(image, l, org=org, fontFace=cv2.FONT_HERSHEY_SIMPLEX,
+                            fontScale=0.4, color=color, thickness=1)
         cv2.imwrite(os.path.join(vis_image_dir, fnames[idx]), image)
 
 def plot_confusion(
