@@ -66,6 +66,7 @@ def test_dataset(test_dir):
     transforms_test = transforms.Compose([
         transforms.Resize(opt.resize),
         transforms.ToImage(),
+        transforms.ConvertImageDtype(torch.float32),
         transforms.Normalize(mean=opt.mean, std=opt.std)
     ])
     test_dataset = ImagesDataset(files=files_test,
