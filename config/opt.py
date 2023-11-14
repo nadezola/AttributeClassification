@@ -1,18 +1,10 @@
-import sys
-
 DEVICE = None
 
-task = 'mobility_devices'
-vis_train_samples = True
-
-if task == 'mobility_devices':
-    dataset_root = '/media/nadesha/hdd/INTERACT-DATASET/dataset_ludwig_gpv_icg_regular_6class'
-    attributes = ['person', 'stroller', 'wheelchair', 'rollator', 'crutch', 'cane']
-else:
-    print(f'Task {task} is not supported')
-    sys.exit(1)
+dataset_root = '/media/nadesha/hdd/INTERACT-DATASET/dataset_ludwig_gpv_icg_regular_6class'
+attributes = ['person', 'stroller', 'wheelchair', 'rollator', 'crutch', 'cane']
 
 extracted_data_dir = 'extracted_nov23'
+vis_train_samples = True
 
 model = 'resnet50'  # vgg16, vgg16_bn, resnet18, resnet34, resnet50, resnet152, densenet201, mobilnet, vit_b_16, vit_l_16
 resize = (224, 224)
