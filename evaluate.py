@@ -33,12 +33,12 @@ if __name__ == '__main__':
     attributes = opt.attributes
 
     args = parse_args()
-    plot_titel = args.model
+    model_name = args.model
     gt_file = args.gt
     pred_file = args.pred
     output_path = Path(args.out)
-    res_eval_file = output_path / 'eval_results.txt'
-    fig_confusion_file = output_path / 'confusion.jpg'
+    res_eval_file = output_path / f'{model_name}_evaluation.csv'
+    fig_confusion_file = output_path / f'{model_name}_confusion.jpg'
 
     if not output_path.exists():
         output_path.mkdir()
@@ -80,19 +80,14 @@ if __name__ == '__main__':
         pred = pred_df.loc[f].values
         confusion[attributes.index(gt), attributes.index(pred)] += 1
 
-    fig_confusion = plot_confusion(confusion.T, names=opt.attributes, title=plot_titel)
+    fig_confusion = plot_confusion(confusion.T, names=opt.attributes, title=model_name)
     fig_confusion.savefig(fig_confusion_file)
 
     with open(res_eval_file, 'w') as f:
-        print(f"\t\tTPs\tGTs\tAcc\n", file=f)
+        print(f"\tTPs\tGTs\tAcc\n", file=f)
         for key, value in acc_by_cls.items():
-            if key == 'person':
-                continue
             acc = value[0] / value[1] if value[1] != 0 else 0
-            if key == 'cane' or key == 'crutch':
-                print(f"{key}\t\t{value[0]}\t{value[1]}\t{acc:.4f}", file=f)
-            else:
-                print(f"{key}\t{value[0]}\t{value[1]}\t{acc:.4f}", file=f)
-        print(f"\nTotal:\t\t{sum(preds)}\t{len(preds)}\t{total_acc:.4f}", file=f)
+            print(f"{key}\t{value[0]}\t{value[1]}\t{acc:.4f}", file=f)
+        print(f"\nTotal:\t{sum(preds)}\t{len(preds)}\t{total_acc:.4f}", file=f)
 
 

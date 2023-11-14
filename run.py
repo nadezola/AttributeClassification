@@ -36,7 +36,7 @@ def main(test_dir, model, output_dir, vis_flag):
 
     res_pred_file = output_dir / 'predictions.txt'
     res_scores_file = output_dir / 'prediction_scores.txt'
-    res_labels_file = output_dir / 'prediction_onehotvectors.txt'
+    res_labels_file = output_dir / 'prediction_one_hot_vectors.txt'
 
     test_dataset = data_processing.test_dataset(test_dir)
     test_dataloader = DataLoader(test_dataset, batch_size=opt.batch_size, shuffle=False)
