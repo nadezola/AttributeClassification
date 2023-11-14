@@ -7,7 +7,7 @@ import numpy as np
 from lib.dataset import ImagesDataset
 import config.opt as opt
 
-DIR_MAIN = Path(opt.dataset_root)
+DIR_MAIN = Path(opt.dataset_root) / opt.extracted_data_root
 DIR_TRAIN = DIR_MAIN / 'train'
 DIR_VAL = DIR_MAIN / 'val'
 
@@ -30,17 +30,15 @@ def trainval_dataset():
 
     transforms_train = transforms.Compose([
         transforms.Resize(opt.resize),
-        #transforms.Pad(32, padding_mode='reflect'),
         transforms.RandomHorizontalFlip(),
-        transforms.ToImageTensor(),
+        transforms.ToTensor(),
         transforms.ConvertImageDtype(torch.float32),
         transforms.Normalize(opt.mean, opt.std),
     ])
 
     transforms_val = transforms.Compose([
         transforms.Resize(opt.resize),
-        #transforms.Pad(32, padding_mode='reflect'),
-        transforms.ToImageTensor(),
+        transforms.ToTensor(),
         transforms.ConvertImageDtype(torch.float32),
         transforms.Normalize(opt.mean, opt.std)
     ])

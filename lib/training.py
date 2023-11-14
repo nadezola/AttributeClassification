@@ -9,8 +9,10 @@ from config import opt
 def save_state(state):
     torch.save(state, f'exps/exp_{opt.expID}/last_state.pth')
 
+
 def save_best_model(best_model):
     torch.save(best_model, f'exps/exp_{opt.expID}/best.pth')
+
 
 def save_best_weights(weights):
     torch.save(weights, f'exps/exp_{opt.expID}/best_weights.pth')
@@ -55,26 +57,10 @@ def training(model, train_dataloader, val_dataloader, optimizer, loss_function, 
                         outputs = model(samples)
                         loss = loss_function(outputs, targets)
 
-                        if opt.task == 'mobility' or opt.task == 'attribute_group_1' or opt.task == 'attribute_group_2' or opt.task == 'attribute_group_3':
-                            preds = outputs.argmax(dim=1)
-                            correct_items = (preds == targets.argmax(dim=1)).float().sum()
-                            epoch_correct_items += correct_items.item()
-                            epoch_gts_num += len(targets)
-                        else:
-                            outputs_np = outputs.detach().to('cpu').numpy()
-                            preds = np.vstack((outputs_np[:, :5].argmax(axis=1),
-                                                    outputs_np[:, 5:7].argmax(axis=1),
-                                                    outputs_np[:, 7:10].argmax(axis=1))).T
-                            preds = np.concatenate((preds, (outputs_np[:, 10:14] > opt.threshold).astype(int)), axis=1)
-
-                            targets_np = targets.detach().to('cpu').numpy()
-                            gts = np.vstack((targets_np[:, :5].argmax(axis=1),
-                                             targets_np[:, 5:7].argmax(axis=1),
-                                             targets_np[:, 7:10].argmax(axis=1))).T
-                            gts = np.concatenate((gts, targets_np[:, 10:14]), axis=1)
-                            correct_items = (preds == gts).sum()
-                            epoch_correct_items += correct_items.item()
-                            epoch_gts_num += (len(targets) * gts.shape[1])
+                        preds = outputs.argmax(dim=1)
+                        correct_items = (preds == targets.argmax(dim=1)).float().sum()
+                        epoch_correct_items += correct_items.item()
+                        epoch_gts_num += len(targets)
 
                         loss.backward()
                         optimizer.step()
@@ -96,26 +82,10 @@ def training(model, train_dataloader, val_dataloader, optimizer, loss_function, 
                         outputs = model(samples)
                         loss = loss_function(outputs, targets)
 
-                        if opt.task == 'mobility' or opt.task == 'attribute_group_1' or opt.task == 'attribute_group_2' or opt.task == 'attribute_group_3':
-                            preds = outputs.argmax(dim=1)
-                            correct_items = (preds == targets.argmax(dim=1)).float().sum()
-                            epoch_correct_items += correct_items.item()
-                            epoch_gts_num += len(targets)
-                        else:
-                            outputs_np = outputs.detach().to('cpu').numpy()
-                            preds = np.vstack((outputs_np[:, :5].argmax(axis=1),
-                                               outputs_np[:, 5:7].argmax(axis=1),
-                                               outputs_np[:, 7:10].argmax(axis=1))).T
-                            preds = np.concatenate((preds, (outputs_np[:, 10:14] > opt.threshold).astype(int)), axis=1)
-
-                            targets_np = targets.detach().to('cpu').numpy()
-                            gts = np.vstack((targets_np[:, :5].argmax(axis=1),
-                                             targets_np[:, 5:7].argmax(axis=1),
-                                             targets_np[:, 7:10].argmax(axis=1))).T
-                            gts = np.concatenate((gts, targets_np[:, 10:14]), axis=1)
-                            correct_items = (preds == gts).sum()
-                            epoch_correct_items += correct_items.item()
-                            epoch_gts_num += (len(targets) * gts.shape[1])
+                        preds = outputs.argmax(dim=1)
+                        correct_items = (preds == targets.argmax(dim=1)).float().sum()
+                        epoch_correct_items += correct_items.item()
+                        epoch_gts_num += len(targets)
 
                         epoch_loss += loss.item()
                         epoch_items += len(targets)
