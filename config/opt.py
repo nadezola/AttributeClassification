@@ -23,8 +23,8 @@ batch_size = 32
 
 lr = 0.0001
 step_size = 2
-mean = [0.3961, 0.4001, 0.4086]  # [0.3220, 0.3190, 0.3244] for ludwig project | [0.3093, 0.3077, 0.3066] for ludwig paper | default [0.4802, 0.4481, 0.3975]
-std = [0.2126, 0.2115, 0.2048]   # [0.1867, 0.1865, 0.1865] for ludwig project | [0.1909, 0.1907, 0.1911] for ludwig paper | default [0.2302, 0.2265, 0.2262]
+mean = [0.3472, 0.3492, 0.3496]
+std = [0.1902, 0.1912, 0.1910]
 
 resume = 0  # experiment ID (expID) to resume training or 0 = without training resume
 freeze = False
