@@ -4,22 +4,21 @@ Evaluates model performance
 
 import numpy as np
 import pandas as pd
-import sklearn.metrics as metrics
-import matplotlib.pyplot as plt
+#import sklearn.metrics as metrics
 from pathlib import Path
-from lib.reformat_labels import decode_labels
 from lib.vis_lib import plot_confusion
 from config import opt
 from lib.decode_labels import decode_labels
+import argparse
 
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', default='ResNet50 (V1)',
+    parser.add_argument('--model', default='ResNet50(V1)',
                         help='Model name to display as a title of Confusion matrix')
     parser.add_argument('--gt', default='mobility_dataset/extracted/test/labels.txt',
                         help='Path to the file with labels')
-    parser.add_argument('--pred', default='outputs/resnet50_V1/prediction_onehotvectors.txt',
+    parser.add_argument('--pred', default='outputs/resnet50_V1/predictions.txt',
                         help='Path to classifier predicitons')
     parser.add_argument('--out', default='outputs', help='Path where to save evaluation results')
 
@@ -53,8 +52,8 @@ if __name__ == '__main__':
     # TPs and total Acc
     preds = []
     for i, f in enumerate(fnames):
-        if f in preds_df.index:
-            preds.append(int(preds_df.loc[f].values == gts[i]))
+        if f in pred_df.index:
+            preds.append(int(pred_df.loc[f].values == gts[i]))
         else:
             print(f'WARNING: ID {i} from GTs is not in predictions')
     total_acc = sum(preds) / len(preds)
@@ -76,9 +75,9 @@ if __name__ == '__main__':
 
     # Confustion Matrix
     confusion = np.zeros((len(attributes), len(attributes)))
-    for f, row in preds_df.iterrows():
+    for f, row in pred_df.iterrows():
         gt = gts[fnames.index(f)]
-        pred = preds_df.loc[f].values
+        pred = pred_df.loc[f].values
         confusion[attributes.index(gt), attributes.index(pred)] += 1
 
     fig_confusion = plot_confusion(confusion[1:, 1:].T, title=plot_titel)
