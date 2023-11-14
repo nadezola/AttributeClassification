@@ -102,13 +102,7 @@ def plot_confusion(
     import seaborn as sn
 
     num_classes = confusion.shape[0]
-    if names is None and num_classes == 5:
-        names = ['pedestrian', 'wheelchair', 'rollator', 'crutch', 'cane']
-    else:
-        names = [str(x) for x in range(num_classes)]
-
     array = confusion / ((confusion.sum(0).reshape(1, -1) + 1e-9) if normalize else 1)  # normalize columns
-
     array[array < 0.0005] = np.nan  # don't annotate (would appear as 0.00)
 
     fig, ax = plt.subplots(1, 1, figsize=(12, 9), tight_layout=True)

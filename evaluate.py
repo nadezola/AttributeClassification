@@ -53,7 +53,7 @@ if __name__ == '__main__':
     preds = []
     for i, f in enumerate(fnames):
         if f in pred_df.index:
-            preds.append(int(pred_df.loc[f].values == gts[i]))
+            preds.append(int((pred_df.loc[f].values == gts[i])[0]))
         else:
             print(f'WARNING: ID {i} from GTs is not in predictions')
     total_acc = sum(preds) / len(preds)
@@ -80,7 +80,7 @@ if __name__ == '__main__':
         pred = pred_df.loc[f].values
         confusion[attributes.index(gt), attributes.index(pred)] += 1
 
-    fig_confusion = plot_confusion(confusion[1:, 1:].T, title=plot_titel)
+    fig_confusion = plot_confusion(confusion.T, names=opt.attributes, title=plot_titel)
     fig_confusion.savefig(fig_confusion_file)
 
     with open(res_eval_file, 'w') as f:
