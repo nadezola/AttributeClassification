@@ -14,7 +14,7 @@ def make_dir(dir):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--phases', default='train, val', help='Choose phases to process, separate by commas')
-    parser.add_argument('--padding', default=10, help='Padding size to extract objects')
+    parser.add_argument('--padding', default=20, help='Padding size to extract objects')
 
     args = parser.parse_args()
     return args
