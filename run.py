@@ -23,7 +23,7 @@ def parse_args():
     parser.add_argument('--model', default='resnet50_V1/best.pth',
                         help='Model to use for predictions')
     parser.add_argument('--data', default='mobility_dataset/extracted/test/images',
-                        help='Path to data')
+                        help='Path to images')
     parser.add_argument('--out', default='outputs/resnet50_V1', help='Path where to save prediction results')
     parser.add_argument('--vis', action='store_true', help='Activate prediction visualization')
 

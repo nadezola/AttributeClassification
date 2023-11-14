@@ -12,6 +12,30 @@
 
 ## Data Preprocessing
 + Configuration file: `config/opt.py`
-+ Extract image patches using yolo bounding box annotations: `data_processing/extract_bboxes.py`
++ Image patch extraction using yolo bounding box annotations: `data_processing/extract_bboxes.py`
 + Label visualization of extracted patches: `vis_extracted_patches.py`
 + Bounding box visualization on dataset frames (yolo format): `vis_yolo_labels.py` 
+
+## Training
++ Configuration file: `config/opt.py`
+```bash
+python main.py 
+```
+
+## Testing
++ Configuration file: `config/opt.py`
+```bash
+python run.py --model <path/to/model.pth> 
+              --data <path/to/images>
+              --out <path/where/to/save/predictions>
+              --vis  # Activate prediction visualization
+```
+
+## Evaluation
++ Configuration file: `config/opt.py`
+```bash
+python evaluate.py --model <"model name for title"> 
+              --gt <path/to/patches/labels.txt>
+              --pred <path/to/classifier/predictions.txt>
+              --out <path/where/to/save/predictions>
+```

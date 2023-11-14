@@ -17,7 +17,7 @@ def parse_args():
     parser.add_argument('--model', default='ResNet50(V1)',
                         help='Model name to display as a title of Confusion matrix')
     parser.add_argument('--gt', default='mobility_dataset/extracted/test/labels.txt',
-                        help='Path to the file with labels')
+                        help='Path to the file with labels of patches')
     parser.add_argument('--pred', default='outputs/resnet50_V1/predictions.txt',
                         help='Path to classifier predicitons')
     parser.add_argument('--out', default='outputs', help='Path where to save evaluation results')
