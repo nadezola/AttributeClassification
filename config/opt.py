@@ -1,6 +1,6 @@
 DEVICE = None
 
-dataset_root = '/media/nadesha/hdd/INTERACT-DATASET/dataset_ludwig_gpv_icg_regular_6class'
+dataset_root = 'mobility_dataset'
 attributes = ['person', 'stroller', 'wheelchair', 'rollator', 'crutch', 'cane']
 
 extracted_data_dir = 'extracted_nov23'
