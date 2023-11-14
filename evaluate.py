@@ -15,11 +15,11 @@ from lib.decode_labels import decode_labels
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', default='ResNet50 (V2)',
+    parser.add_argument('--model', default='ResNet50 (V1)',
                         help='Model name to display as a title of Confusion matrix')
-    parser.add_argument('--gt', default='/media/nadesha/hdd/INTERACT-DATASET/dataset_ludwig_gpv_icg_regular_6class/extracted_nov23/val',
+    parser.add_argument('--gt', default='mobility_dataset/extracted/test/labels.txt',
                         help='Path to the file with labels')
-    parser.add_argument('--pred', default='',
+    parser.add_argument('--pred', default='outputs/resnet50_V1/prediction_onehotvectors.txt',
                         help='Path to classifier predicitons')
     parser.add_argument('--out', default='outputs', help='Path where to save evaluation results')
 
