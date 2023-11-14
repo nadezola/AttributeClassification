@@ -10,6 +10,7 @@ from lib import data_processing
 from lib import vis_lib
 import config.opt as opt
 import numpy as np
+import argparse
 
 
 def makedir(dir):
@@ -19,11 +20,11 @@ def makedir(dir):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model', default='outputs/resnet50_V1/best.pth',
+    parser.add_argument('--model', default='resnet50_V1/best.pth',
                         help='Model to use for predictions')
-    parser.add_argument('--data', default='/media/nadesha/hdd/INTERACT-DATASET/dataset_ludwig_gpv_icg_regular_6class/extracted_nov23/val/images',
+    parser.add_argument('--data', default='mobility_dataset/extracted/test/images',
                         help='Path to data')
-    parser.add_argument('--out', default='outputs', help='Path where to save prediction results')
+    parser.add_argument('--out', default='outputs/resnet50_V1', help='Path where to save prediction results')
     parser.add_argument('--vis', action='store_true', help='Activate prediction visualization')
 
 
@@ -48,14 +49,14 @@ def main(test_dir, model, output_dir, vis_flag):
     preds_classes = []
     preds_scores = []
     with torch.no_grad():
-        for samples, batch_fnames in tqdm(test_dataloader):
+        for samples, batch_fnames in tqdm(test_dataloader, desc='Prediction:'):
             samples = samples.to(opt.DEVICE)
             batch_outputs = model(samples)
 
             batch_outputs_np = batch_outputs.to('cpu').numpy()
             batch_preds = np.zeros_like(batch_outputs_np)
             batch_preds[np.arange(len(batch_outputs_np)), batch_outputs_np.argmax(1)] = 1
-            batch_preds_cls = list([opt.attributes[i]] for i in batch_outputs_np.argmax(axis=1))
+            batch_preds_cls = list(opt.attributes[i] for i in batch_outputs_np.argmax(axis=1))
 
             fnames.extend(list(batch_fnames))
             preds_classes.extend(batch_preds_cls)
@@ -65,12 +66,12 @@ def main(test_dir, model, output_dir, vis_flag):
     # Write word preds
     with open(res_pred_file, 'w') as f:
         for i in range(len(fnames)):
-            print(f"{fnames[i]} {' '.join(preds_classes[i])}", file=f)
+            print(f"{fnames[i]} {preds_classes[i]}", file=f)
 
     if vis_flag:
         vis_image_dir = output_dir / 'vis_preds'
         makedir(vis_image_dir)
-        vis_lib.vis_labels(fnames, preds_classes, test_dir, vis_image_dir, color=(0, 255, 0), org=(5, 20))
+        vis_lib.vis_labels(fnames, preds_classes, test_dir, vis_image_dir)
 
     # Write score preds
     with open(res_scores_file, 'w') as f:

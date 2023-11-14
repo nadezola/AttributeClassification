@@ -80,7 +80,7 @@ def vis_labels(fnames, labels, image_dir, vis_image_dir, color=(0, 0, 0), org=(5
         :param labels: list of classes in the same order
     '''
 
-    for idx in tqdm(range(len(fnames))):
+    for idx in tqdm(range(len(fnames)), desc='Label visualization:'):
         file = os.path.join(image_dir, fnames[idx])
         image = cv2.imread(file)
         l = labels[idx]
