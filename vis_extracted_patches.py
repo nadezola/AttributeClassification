@@ -1,5 +1,5 @@
 """
-Draws Human Attributes labels on extracted object images
+Draws Human Attributes labels on extracted patches
 """
 
 from pathlib import Path

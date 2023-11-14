@@ -1,5 +1,5 @@
 """
-Draws object bounding boxes on the frames
+Draws object bounding boxes on dataset frames
 """
 
 import numpy as np

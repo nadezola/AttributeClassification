@@ -1,3 +1,7 @@
+"""
+Extracts image patches using yolo bounding box annotations
+"""
+
 import numpy as np
 import cv2
 from config import opt

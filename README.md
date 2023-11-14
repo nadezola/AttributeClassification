@@ -10,4 +10,8 @@
  
 <img src="docs/exampl_train_data.jpg" title="Exemplary training dataset"/>
 
-## 
+## Data Preprocessing
++ Configuration file: `config/opt.py`
++ Extract image patches using yolo bounding box annotations: `data_processing/extract_bboxes.py`
++ Label visualization of extracted patches: `vis_extracted_patches.py`
++ Bounding box visualization on dataset frames (yolo format): `vis_yolo_labels.py` 
