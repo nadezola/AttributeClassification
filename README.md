@@ -8,4 +8,4 @@
 > L. Mohr, N. Kirillova, H. Possegger, H. Bischof\
 > [Dataset](https://repository.tugraz.at/records/2gat1-pev27)
  
-<img src="/home/nadesha/my_projects/AttributeClassification/docs/exampl_train_data.jpg" title="Exemplary training dataset"/>
+<img src="docs/exampl_train_data.jpg" title="Exemplary training dataset"/>
