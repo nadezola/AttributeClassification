@@ -1,3 +1,7 @@
+"""
+Trains model to classify Human Attributes
+"""
+
 from pathlib import Path
 
 import numpy as np

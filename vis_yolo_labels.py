@@ -1,3 +1,7 @@
+"""
+Draws object bounding boxes on the frames
+"""
+
 import numpy as np
 import cv2
 import argparse

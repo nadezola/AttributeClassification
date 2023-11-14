@@ -1,3 +1,7 @@
+"""
+Draws Human Attributes labels on extracted object images
+"""
+
 from pathlib import Path
 from lib.vis_lib import vis_labels
 from config import opt
