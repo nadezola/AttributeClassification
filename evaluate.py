@@ -33,8 +33,12 @@ if __name__ == '__main__':
     plot_titel = args.model
     gt_file = args.gt
     pred_file = args.pred
-    res_eval_file = Path(args.out) / 'eval_results.txt'
-    fig_confusion_file = Path(args.out) / 'confusion.jpg'
+    output_path = Path(args.out)
+    res_eval_file = output_path / 'eval_results.txt'
+    fig_confusion_file = output_path / 'confusion.jpg'
+
+    if not output_path.exists():
+        output_path.mkdir()
 
     # Download GTs & Preds
     fnames, gts = decode_labels(gt_file, attributes)
