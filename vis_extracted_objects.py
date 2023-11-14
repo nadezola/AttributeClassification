@@ -13,7 +13,7 @@ if __name__ == '__main__':
     root = Path(opt.dataset_root) / opt.extracted_data_dir / phase
     label_file = root / 'labels.txt'
     img_dir = root / 'images'
-    output_vis_dir = root / 'vis'
+    output_vis_dir = root / 'vis_objects'
 
     if not output_vis_dir.exists():
         output_vis_dir.mkdir()

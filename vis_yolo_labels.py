@@ -57,7 +57,7 @@ if __name__ == '__main__':
     for phase in phases:
         imgs_dir = dataset_root / 'images' / phase
         lbls_dir = dataset_root / 'labels' / phase
-        out_imgs_dir = dataset_root / 'vis' / phase
+        out_imgs_dir = dataset_root / 'vis_yolo_labels' / phase
 
         if not out_imgs_dir.exists():
             out_imgs_dir.mkdir(parents=True)
