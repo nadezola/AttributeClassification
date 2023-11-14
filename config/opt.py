@@ -12,11 +12,11 @@ else:
     print(f'Task {task} is not supported')
     sys.exit(1)
 
-extracted_data_root = 'extracted_nov23'
+extracted_data_dir = 'extracted_nov23'
 
 model = 'resnet50'  # vgg16, vgg16_bn, resnet18, resnet34, resnet50, resnet152, densenet201, mobilnet, vit_b_16, vit_l_16
 resize = (224, 224)
-weights = 'IMAGENET1K_V1'  # IMAGENET1K_V1 (DEFAULT) | IMAGENET1K_V2 (only for resnet152, resnet50, mobilenet_v3_largeweights)
+weights = 'IMAGENET1K_V1'  # IMAGENET1K_V1 (DEFAULT) | IMAGENET1K_V2 (only for resnet50, resnet152, mobilenet)
 
 num_epochs = 10
 batch_size = 32

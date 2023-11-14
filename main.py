@@ -14,7 +14,7 @@ import config.opt as opt
 
 
 def load_last_state(expID, model, optimizer):
-    state = torch.load(f'exps/exp_{expID}/last_state.pth')
+    state = torch.load(f'outputs/exps/exp_{expID}/last_state.pth')
     model.load_state_dict(state['model_state_dict'])
     optimizer.load_state_dict(state['optimizer_state_dict'])
     return model, optimizer, state
@@ -56,7 +56,7 @@ def main():
     min_loss_epoch = val_loss_array.index(min_loss)
     min_loss_accuracy = val_acc_array[min_loss_epoch]
 
-    with open(f'exps/exp_{opt.expID}/training_results.txt', 'w') as f:
+    with open(f'outputs/exps/exp_{opt.expID}/training_results.txt', 'w') as f:
         print("Training parameters:", file=f)
         print(f"\tTrainVal dataset: {opt.dataset_root}", file=f)
         print(f"\tAttributes: {opt.attributes}", file=f)
@@ -90,7 +90,7 @@ if __name__ == '__main__':
         print('CUDA is not available. Working on CPU')
         opt.DEVICE = torch.device('cpu')
 
-    results_dir = Path('exps')
+    results_dir = Path('outputs') / 'exps'
     filelist = list(results_dir.glob('exp_*'))
     if len(filelist) > 0:
         filelist = sorted([int(x.stem.split('_')[-1]) for x in filelist])

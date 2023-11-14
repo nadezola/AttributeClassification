@@ -7,15 +7,15 @@ from config import opt
 
 
 def save_state(state):
-    torch.save(state, f'exps/exp_{opt.expID}/last_state.pth')
+    torch.save(state, f'outputs/exps/exp_{opt.expID}/last_state.pth')
 
 
 def save_best_model(best_model):
-    torch.save(best_model, f'exps/exp_{opt.expID}/best.pth')
+    torch.save(best_model, f'outputs/exps/exp_{opt.expID}/best.pth')
 
 
 def save_best_weights(weights):
-    torch.save(weights, f'exps/exp_{opt.expID}/best_weights.pth')
+    torch.save(weights, f'outputs/exps/exp_{opt.expID}/best_weights.pth')
 
 
 def training(model, train_dataloader, val_dataloader, optimizer, loss_function, scheduler, state):

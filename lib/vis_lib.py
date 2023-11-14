@@ -1,4 +1,3 @@
-"""Visualizing random items from the datasets"""
 import glob
 import os.path
 
@@ -24,7 +23,7 @@ def plot_train_data(dataset, phase):
         ax.set_title(dataset[n][1])
         ax.imshow(img)
     plt.show()
-    fig.savefig(f'exps/exp_{opt.expID}/random_{phase}_data.jpg')
+    fig.savefig(f'outputs/exps/exp_{opt.expID}/random_{phase}_data.jpg')
 
 
 def plot_eval_data(img_dir, label_file):
@@ -43,7 +42,7 @@ def plot_eval_data(img_dir, label_file):
         ax.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
         n += 10
     plt.show()
-    fig.savefig(f'exps/exp_{opt.expID}/random_eval_data.jpg')
+    fig.savefig(f'outputs/exps/exp_{opt.expID}/random_eval_data.jpg')
 
 
 def plot_train_results_data(training_results, num_epochs, batch_size):
@@ -60,7 +59,7 @@ def plot_train_results_data(training_results, num_epochs, batch_size):
     axs[1].legend(loc='best')
     axs[1].set(xlabel='epochs', ylabel='accuracy')
     #plt.show()
-    fig.savefig(f'exps/exp_{opt.expID}/train_results.jpg')
+    fig.savefig(f'outputs/exps/exp_{opt.expID}/train_results.jpg')
 
 
 def plot_loss(train_loss_array, val_loss_array, epoch):
@@ -72,7 +71,7 @@ def plot_loss(train_loss_array, val_loss_array, epoch):
     plt.xlabel('Epochs')
     plt.ylabel('Loss')
     plt.grid('off')
-    plt.savefig(f'exps/exp_{opt.expID}/loss.jpg')
+    plt.savefig(f'outputs/exps/exp_{opt.expID}/loss.jpg')
 
 
 def vis_labels(fnames, labels, image_dir, vis_image_dir, color=(0, 0, 0), org=(5, 10)):
@@ -92,62 +91,8 @@ def vis_labels(fnames, labels, image_dir, vis_image_dir, color=(0, 0, 0), org=(5
                             fontScale=0.4, color=color, thickness=1)
         cv2.imwrite(os.path.join(vis_image_dir, fnames[idx]), image)
 
+
 def plot_confusion(
-        confusion: np.ndarray,
-        normalize=True,
-        names: [] = None,
-        cmap: str = 'Blues',
-        title: str = None,
-) -> plt.Figure:
-    import seaborn as sn
-
-    num_classes = confusion.shape[0]
-    # if names is None and num_classes == 5:
-    #     names = ['pedestrian', 'wheelchair', 'rollator', 'crutch', 'cane']
-    # else:
-    #     names = [str(x) for x in range(num_classes)]
-
-    array = confusion / ((confusion.sum(0).reshape(1, -1) + 1e-9) if normalize else 1)  # normalize columns
-
-    array[array < 0.0005] = np.nan  # don't annotate (would appear as 0.00)
-
-    fig, ax = plt.subplots(1, 1, figsize=(12, 9), tight_layout=True)
-    sn.set(font_scale=1.0 if num_classes < 50 else 0.8)  # for label size
-    labels = (0 < len(names) < 99) and (len(names) == num_classes)  # apply names to ticklabels
-    if labels:
-        ticklabels = names
-    else:
-        ticklabels = "auto"
-
-    annotations = []
-    for row_idx in range(num_classes):
-        if normalize:
-            annotations.append([f'{array[row_idx, col_idx]:.1%}\n{int(confusion[row_idx, col_idx]):d}' for
-                                col_idx in range(num_classes)])
-        else:
-            annotations.append([f'{int(confusion[row_idx, col_idx]):d}' for col_idx in range(num_classes)])
-    annotations = np.array(annotations)
-
-    sn.heatmap(array,
-               ax=ax,
-               # annot=nc < 30,
-               annot=annotations if num_classes < 20 else False,
-               annot_kws={
-                   "size": 10},
-               cmap=cmap,
-               # fmt='.2f',
-               fmt='',
-               square=True,
-               vmin=0.0,
-               xticklabels=ticklabels,
-               yticklabels=ticklabels).set_facecolor((1, 1, 1))
-    ax.set_xlabel('True')
-    ax.set_ylabel('Predicted')
-    ax.set_title(title if title is not None else 'Confusion Matrix')
-
-    return fig
-
-def plot_confusion2(
         confusion: np.ndarray,
         normalize=True,
         names: [] = None,

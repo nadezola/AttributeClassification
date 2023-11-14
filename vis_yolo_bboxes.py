@@ -9,8 +9,8 @@ import viren2d
 
 def parse_args():
     parser = argparse.ArgumentParser()
+
     parser.add_argument('--phases', default='val', help='Choose phases to process, separate by commas')
-    parser.add_argument('--out', default='outputs/vis', help='Folder to save results')
 
     args = parser.parse_args()
     return args
@@ -53,7 +53,7 @@ if __name__ == '__main__':
     for phase in phases:
         imgs_dir = dataset_root / 'images' / phase
         lbls_dir = dataset_root / 'labels' / phase
-        out_imgs_dir = Path(args.out) / phase
+        out_imgs_dir = dataset_root / 'vis' / phase
 
         if not out_imgs_dir.exists():
             out_imgs_dir.mkdir(parents=True)

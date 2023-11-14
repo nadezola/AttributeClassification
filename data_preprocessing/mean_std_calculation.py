@@ -7,7 +7,7 @@ from config import opt
 from tqdm import tqdm
 
 
-root = Path(opt.dataset_root) / opt.extracted_data_root / 'train' / 'images'
+root = Path(opt.dataset_root) / opt.extracted_data_dir / 'train' / 'images'
 imglist = list(root.glob('*'))
 transform = transforms.Compose([transforms.ToTensor()])
 

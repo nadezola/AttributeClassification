@@ -29,8 +29,8 @@ if __name__ == '__main__':
         dataset_root = Path(opt.dataset_root)
         imgs_dir = dataset_root / 'images' / phase
         lbls_dir = dataset_root / 'labels' / phase
-        out_imgs_dir = dataset_root / opt.extracted_data_root / phase / 'images'
-        out_lbls_f = dataset_root / opt.extracted_data_root / phase / 'labels.txt'
+        out_imgs_dir = dataset_root / opt.extracted_data_dir / phase / 'images'
+        out_lbls_f = dataset_root / opt.extracted_data_dir / phase / 'labels.txt'
 
         make_dir(out_imgs_dir)
 
