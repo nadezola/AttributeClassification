@@ -17,7 +17,6 @@ class ImagesDataset(Dataset):
 
     def __getitem__(self, index):
         pic = Image.open(self.files[index]).convert('RGB')
-        #pic = self.add_margin(pic)
 
         if self.mode == 'train' or self.mode == 'val':
             x = self.transforms(pic)
@@ -37,20 +36,3 @@ class ImagesDataset(Dataset):
         result.paste(pil_img, (left_pad, top_pad))
         return result
 
-
-# class HumanDataset(Dataset):
-#     def __init__(self, frame, human_dets, transforms):
-#         super().__init__()
-#         self.frame = frame
-#         self.human_dets = human_dets
-#         self.transforms = transforms
-#
-#     def __len__(self):
-#         return self.human_dets.shape[0]
-#
-#     def __getitem__(self, index):
-#         x, y, w, h = self.human_dets[index, 2:6]
-#         human_image = self.frame[int(y):int(y + h), int(x):int(x + w)]
-#         pic = Image.fromarray(human_image)
-#         x = self.transforms(pic)
-#         return x, self.human_dets[index, 1]

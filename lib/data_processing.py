@@ -1,4 +1,3 @@
-#from torchvision import transforms
 import torch
 import torchvision.transforms.v2 as transforms
 from pathlib import Path
@@ -31,14 +30,14 @@ def trainval_dataset():
     transforms_train = transforms.Compose([
         transforms.Resize(opt.resize),
         transforms.RandomHorizontalFlip(),
-        transforms.ToTensor(),
+        transforms.ToImage(),
         transforms.ConvertImageDtype(torch.float32),
         transforms.Normalize(opt.mean, opt.std),
     ])
 
     transforms_val = transforms.Compose([
         transforms.Resize(opt.resize),
-        transforms.ToTensor(),
+        transforms.ToImage(),
         transforms.ConvertImageDtype(torch.float32),
         transforms.Normalize(opt.mean, opt.std)
     ])
@@ -66,7 +65,7 @@ def test_dataset(test_dir):
 
     transforms_test = transforms.Compose([
         transforms.Resize(opt.resize),
-        transforms.ToTensor(),
+        transforms.ToImage(),
         transforms.Normalize(mean=opt.mean, std=opt.std)
     ])
     test_dataset = ImagesDataset(files=files_test,
