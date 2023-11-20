@@ -1,12 +1,15 @@
 # Human Attribute Classification
 
 > **[BMVC 2023] A Comprehensive Crossroad Camera Dataset of Mobility Aid Users**            
-> L. Mohr, N. Kirillova, H. Possegger, H. Bischof\
-> Paper
+L. Mohr, N. Kirillova, H. Possegger, H. Bischof\
+Paper
 
 > **[TU Graz] Crossroad Camera Dataset - Mobility Aid Users**\
-> L. Mohr, N. Kirillova, H. Possegger, H. Bischof\
-> [Dataset](https://repository.tugraz.at/records/2gat1-pev27)
+L. Mohr, N. Kirillova, H. Possegger, H. Bischof\
+[Dataset](https://repository.tugraz.at/records/2gat1-pev27)
+
+> **[GitHub] YOLOv5 and YOLOv8 modified for YOLO9000-like (but shallow) hierarchical class training**\
+[Repository](https://github.com/mordecaimalignatius/yolo-9k) 
  
 <img src="docs/exampl_train_data.jpg" title="Exemplary training dataset"/>
 
